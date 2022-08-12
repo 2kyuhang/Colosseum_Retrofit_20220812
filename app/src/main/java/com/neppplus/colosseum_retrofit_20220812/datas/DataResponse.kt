@@ -4,6 +4,7 @@ package com.neppplus.colosseum_retrofit_20220812.datas
 data class DataResponse (
     val token : String,
     val user : UserData,
+    val topic : TopicData,
     val topics : List<TopicData>
         ) {
 }
