@@ -37,4 +37,11 @@ interface APIList {
         @Query("order_type") orderType : String,
     ) : Call<BasicResponse>
 
+    @FormUrlEncoded
+    @POST("/topic_reply")
+    fun postRequestAddReply(
+        @Header("X-Http-Token") token: String,
+        @Field ("topic_id") topicId : Int,
+        @Field ("content") content : String
+    ): Call<BasicResponse>
 }
