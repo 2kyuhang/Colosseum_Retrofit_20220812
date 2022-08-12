@@ -87,12 +87,14 @@ class DetailTopicActivity : BaseActivity() {
 
     fun getTopicDetailFromServer() {
         apiList.getRequestTopicDetail(
-            token, "NEW", mTopicData.id
+            token, mTopicData.id,"NEW"
         ).enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
                     mTopicData = br.data.topic
+
+                    Log.d(TAG, br.data.topic.toString())
                 }
             }
 

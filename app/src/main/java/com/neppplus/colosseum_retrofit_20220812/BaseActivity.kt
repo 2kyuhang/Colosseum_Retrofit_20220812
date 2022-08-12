@@ -25,6 +25,8 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var retrofit: Retrofit
     lateinit var apiList : APIList
 
+    val TAG = javaClass.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this

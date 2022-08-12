@@ -33,8 +33,8 @@ interface APIList {
     @GET("/topic/{topic_id}")
     fun getRequestTopicDetail(
         @Header("X-Http-Token") token: String,
+        @Path("topic_id") topicId : Int,
         @Query("order_type") orderType : String,
-        @Path("topic_id") topicId : Int
     ) : Call<BasicResponse>
 
 }
