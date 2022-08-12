@@ -23,7 +23,7 @@ class TopicRecyclerAdapter(
 
             titleTxt.text = item.title
             replyCountTxt.text = "현재 댓글 수 : ${item.reply_count}개"
-            Glide.with(mContext).load(item.imgUrl).into(backgroundImg)
+            Glide.with(mContext).load(item.img_url).into(backgroundImg)
         }
     }
 
