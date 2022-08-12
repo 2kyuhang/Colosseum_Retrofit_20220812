@@ -8,10 +8,11 @@ data class ReplyData (
     val topic_id : Int,
     val side_id : Int,
     val user : UserData,
+    val created_at : String,
     val selected_side : SideData,
     val like_count : Int,
     val dislike_count : Int,
     val my_like : Boolean,
     val my_dislike : Boolean,
-    val reply_count : Boolean
+    val reply_count : Int
         ) : Serializable

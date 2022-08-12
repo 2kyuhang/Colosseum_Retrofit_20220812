@@ -6,11 +6,15 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.neppplus.colosseum_retrofit_20220812.adapter.ReplyRecyclerAdapter
 import com.neppplus.colosseum_retrofit_20220812.databinding.ActivityDetailTopicBinding
 import com.neppplus.colosseum_retrofit_20220812.datas.BasicResponse
+import com.neppplus.colosseum_retrofit_20220812.datas.ReplyData
 import com.neppplus.colosseum_retrofit_20220812.datas.TopicData
 import com.neppplus.colosseum_retrofit_20220812.utils.ContextUtil
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +26,9 @@ class DetailTopicActivity : BaseActivity() {
     lateinit var mTopicData : TopicData
 
     lateinit var token : String
+
+    lateinit var mReplyAdapter : ReplyRecyclerAdapter
+    val mReplyList = ArrayList<ReplyData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +81,10 @@ class DetailTopicActivity : BaseActivity() {
         token = ContextUtil.getLoginToken(mContext)
         getTopicDetailFromServer()
         setDataToUi()
+
+        mReplyAdapter = ReplyRecyclerAdapter(mContext, mReplyList)
+        binding.replyRecyclerView.adapter = mReplyAdapter
+        binding.replyRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
     fun setDataToUi() {
@@ -92,14 +103,27 @@ class DetailTopicActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
+
                     mTopicData = br.data.topic
 
-                    Log.d(TAG, br.data.topic.toString())
+                    mReplyList.clear()
+                    mReplyList.addAll(br.data.topic.replies)
+
+                    mReplyAdapter.notifyDataSetChanged()
+                    Log.d(TAG, br.data.topic.replies.toString())
+                }
+                else {
+                    val errorBodyStr = response.errorBody()!!.string()
+                    val jsonObj = JSONObject(errorBodyStr)
+                    val code = jsonObj.getInt("code")
+                    val message = jsonObj.getString("message")
+
+                    Log.d(TAG, "code : $code, message : $message")
                 }
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
+                Log.e(TAG, t.toString())
             }
         })
     }
