@@ -38,6 +38,12 @@ class DetailTopicActivity : BaseActivity() {
         setValues()
     }
 
+    override fun onResume() {
+        super.onResume()
+//        의견 남긴 후 RecyclerView 새로고침
+        getTopicDetailFromServer()
+    }
+
     override fun setupEvents() {
         val ocl = object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -92,7 +98,6 @@ class DetailTopicActivity : BaseActivity() {
     override fun setValues() {
         mTopicData = intent.getSerializableExtra("topicData") as TopicData
         token = ContextUtil.getLoginToken(mContext)
-        getTopicDetailFromServer()
         setDataToUi()
 
         mReplyAdapter = ReplyRecyclerAdapter(mContext, mReplyList)
@@ -123,7 +128,7 @@ class DetailTopicActivity : BaseActivity() {
                     mReplyList.addAll(br.data.topic.replies)
 
                     mReplyAdapter.notifyDataSetChanged()
-                    Log.d(TAG, br.data.topic.replies.toString())
+//                    Log.d(TAG, br.data.topic.replies.toString())
                 }
                 else {
                     val errorBodyStr = response.errorBody()!!.string()
@@ -131,12 +136,12 @@ class DetailTopicActivity : BaseActivity() {
                     val code = jsonObj.getInt("code")
                     val message = jsonObj.getString("message")
 
-                    Log.d(TAG, "code : $code, message : $message")
+//                    Log.d(TAG, "code : $code, message : $message")
                 }
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-                Log.e(TAG, t.toString())
+//                Log.e(TAG, t.toString())
             }
         })
     }
