@@ -1,5 +1,6 @@
 package com.neppplus.colosseum_retrofit_20220812
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -74,6 +75,18 @@ class DetailTopicActivity : BaseActivity() {
 
         binding.vote1Btn.setOnClickListener(ocl)
         binding.vote2Btn.setOnClickListener(ocl)
+
+        binding.addReplyBtn.setOnClickListener {
+//            진형 선택을 하지 않았다면, 진형 선택을 하도록 설정(의견 게제 불가!)
+            if (mTopicData.my_side_id == -1) {
+                Toast.makeText(mContext, "의견을 남기시려면 진영을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            myIntent.putExtra("topicData", mTopicData)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {
