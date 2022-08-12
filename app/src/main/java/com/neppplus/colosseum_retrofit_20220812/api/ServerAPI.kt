@@ -8,13 +8,14 @@ class ServerAPI {
     companion object {
 
         private var retrofit : Retrofit? = null
+        private val BASE_URL = "http://54.180.52.26"
 
         fun getRetrofit() : Retrofit {
 
             if (retrofit == null) {
 
                 retrofit = Retrofit.Builder()
-                    .baseUrl("http://54.180.52.26")
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }
