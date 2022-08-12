@@ -1,5 +1,6 @@
 package com.neppplus.colosseum_retrofit_20220812
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
@@ -31,7 +32,13 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        binding.logoutBtn.setOnClickListener {
+            ContextUtil.clearData(mContext)
 
+            val myIntent = Intent(mContext, LoginActivity::class.java)
+            startActivity(myIntent)
+            finishAffinity()
+        }
     }
 
     override fun setValues() {
