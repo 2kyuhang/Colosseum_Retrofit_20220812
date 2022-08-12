@@ -30,4 +30,11 @@ interface APIList {
         @Field("side_id") sideId : Int
     ) : Call<BasicResponse>
 
+    @GET("/topic/{topic_id}")
+    fun getRequestTopicDetail(
+        @Header("X-Http-Token") token: String,
+        @Query("order_type") orderType : String,
+        @Path("topic_id") topicId : Int
+    ) : Call<BasicResponse>
+
 }

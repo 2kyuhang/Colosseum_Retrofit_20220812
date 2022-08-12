@@ -72,6 +72,7 @@ class DetailTopicActivity : BaseActivity() {
     override fun setValues() {
         mTopicData = intent.getSerializableExtra("topicData") as TopicData
         token = ContextUtil.getLoginToken(mContext)
+        getTopicDetailFromServer()
         setDataToUi()
     }
 
@@ -85,6 +86,19 @@ class DetailTopicActivity : BaseActivity() {
     }
 
     fun getTopicDetailFromServer() {
+        apiList.getRequestTopicDetail(
+            token, "NEW", mTopicData.id
+        ).enqueue(object : Callback<BasicResponse>{
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    val br = response.body()!!
+                    mTopicData = br.data.topic
+                }
+            }
 
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
     }
 }
