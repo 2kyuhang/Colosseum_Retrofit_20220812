@@ -13,22 +13,22 @@ class ContextUtil {
 
         fun setLoginToken (context: Context, token : String) {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-            pref.edit().putString("LOGIN_TOKEN", token).apply()
+            pref.edit().putString(LOGIN_TOKEN, token).apply()
         }
 
         fun getLoginToken (context: Context) : String {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-            return pref.getString("LOGIN_TOKNE", "")!!
+            return pref.getString(LOGIN_TOKEN, "")!!
         }
 
         fun setAutoLogin (context: Context, isAutoLogin : Boolean) {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-            pref.edit().putBoolean("AUTO_LOGIN", isAutoLogin).apply()
+            pref.edit().putBoolean(AUTO_LOGIN, isAutoLogin).apply()
         }
 
         fun getAutoLogin (context: Context) : Boolean {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-            return pref.getBoolean("AUTO_LOGIN", false)
+            return pref.getBoolean(AUTO_LOGIN, false)
         }
 
         fun clearData(context: Context) {
