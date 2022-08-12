@@ -9,6 +9,10 @@ import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.neppplus.colosseum_retrofit_20220812.api.APIList
+import com.neppplus.colosseum_retrofit_20220812.api.ServerAPI
+import retrofit2.Retrofit
+import retrofit2.create
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -18,9 +22,15 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var titleTxt : TextView
     lateinit var profileIcon : ImageView
 
+    lateinit var retrofit: Retrofit
+    lateinit var apiList : APIList
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
+
+        retrofit = ServerAPI.getRetrofit()
+        apiList = retrofit.create(APIList::class.java)
 
         if (supportActionBar != null) {
             setCustomActionBar()
