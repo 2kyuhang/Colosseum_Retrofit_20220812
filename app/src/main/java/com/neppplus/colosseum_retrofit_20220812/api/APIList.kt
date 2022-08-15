@@ -9,9 +9,9 @@ interface APIList {
     @FormUrlEncoded
     @POST("/user")
     fun postRequestLogin(
-        @Field("email") email : String,
+        @Field("email") email : String, //form 데이터는 @Field("email") 이렇게 보낸다
         @Field("password") password : String
-    ) : Call<BasicResponse>
+    ) : Call<BasicResponse> //Call은 레트로핏으로 임포트
 
     @GET("/v2/main_info")
     fun getRequestMainInfo(

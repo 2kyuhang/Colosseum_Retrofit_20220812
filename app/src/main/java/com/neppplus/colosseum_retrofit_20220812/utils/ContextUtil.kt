@@ -31,6 +31,7 @@ class ContextUtil {
             return pref.getBoolean(AUTO_LOGIN, false)
         }
 
+        //정보 삭제
         fun clearData(context: Context) {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
             pref.edit().clear().apply()
