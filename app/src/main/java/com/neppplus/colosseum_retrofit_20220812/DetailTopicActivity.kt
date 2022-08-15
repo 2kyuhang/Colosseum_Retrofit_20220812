@@ -38,6 +38,7 @@ class DetailTopicActivity : BaseActivity() {
         setValues()
     }
 
+    //의견을 남기고 화면이 뒤로갔다가 다시 오면서 새로고침!
     override fun onResume() {
         super.onResume()
 //        의견 남긴 후 RecyclerView 새로고침
@@ -45,6 +46,8 @@ class DetailTopicActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        //투표 새로운 방법 //태그(xml안에)를이용 함
         val ocl = object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 var sideId : Int
@@ -55,7 +58,7 @@ class DetailTopicActivity : BaseActivity() {
                 else {
                     sideId = mTopicData.sides[1].id
                 }
-
+//                                                             페이지 다운 3번 위로 한번 레트로핏 나옴
                 apiList.postRequestTopicVote(token, sideId).enqueue(object : Callback<BasicResponse>{
                     override fun onResponse(
                         call: Call<BasicResponse>,
@@ -95,7 +98,7 @@ class DetailTopicActivity : BaseActivity() {
         }
     }
 
-    override fun setValues() {
+    override fun setValues() {//여기서 어답터 이용해서 연결
         mTopicData = intent.getSerializableExtra("topicData") as TopicData
         token = ContextUtil.getLoginToken(mContext)
         setDataToUi()
@@ -105,7 +108,7 @@ class DetailTopicActivity : BaseActivity() {
         binding.replyRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
-    fun setDataToUi() {
+    fun setDataToUi() {//여긴 투표 상단(리사이클러뷰 말고) 이미지 넣기
         binding.titleTxt.text = mTopicData.title
         Glide.with(mContext).load(mTopicData.img_url).into(binding.backgroundImg)
         binding.side1Txt.text = mTopicData.sides[0].title
@@ -114,6 +117,7 @@ class DetailTopicActivity : BaseActivity() {
         binding.vote2CountTxt.text = "${mTopicData.sides[1].vote_count}표"
     }
 
+    //서버에서 받아오는것!
     fun getTopicDetailFromServer() {
         apiList.getRequestTopicDetail(
             token, mTopicData.id,"NEW"

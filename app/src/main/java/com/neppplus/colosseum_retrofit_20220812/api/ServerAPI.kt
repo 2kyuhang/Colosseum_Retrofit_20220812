@@ -7,6 +7,7 @@ class ServerAPI {
 
     companion object {
 
+        //싱클턴 패턴으로!
         private var retrofit : Retrofit? = null
         private val BASE_URL = "http://54.180.52.26"
 

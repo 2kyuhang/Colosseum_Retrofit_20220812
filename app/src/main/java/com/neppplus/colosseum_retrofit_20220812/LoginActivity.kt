@@ -38,9 +38,9 @@ class LoginActivity : BaseActivity() {
                     call: Call<BasicResponse>,
                     response: Response<BasicResponse>
                 ) {
+                    //(code == 200) > 로그인 성공 (응답정보위치 : response.body() : BasicResponse)
                     if (response.isSuccessful) {
-//                        (code == 200) > 로그인 성공 (응답정보위치 : response.body() : BasicResponse)
-                        val br = response.body()!!
+                        val br = response.body()!!//이제 이안에 정보가 다 있다?
 
                         ContextUtil.setLoginToken(mContext, br.data.token)
 
@@ -58,6 +58,7 @@ class LoginActivity : BaseActivity() {
                     }
                     else {
 //                        code == 200이 아닐경우 > 로그인 실패 (응답정보위치 : response.errorBody() : ResponseBody)
+                        //200코드랑 위치가 달라서 아래처럼 받아줘야 한다 OKHttp처럼!
                         val errorBodyStr = response.errorBody()!!.string()
                         val jsonObj = JSONObject(errorBodyStr)
                         val code = jsonObj.getInt("code")

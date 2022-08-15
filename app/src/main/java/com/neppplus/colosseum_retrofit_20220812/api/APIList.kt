@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface APIList {
 
-    @FormUrlEncoded
+    @FormUrlEncoded//form데이터는 이것도 붙여줘야 한다 => POST, PUT, PATCH 만 해당
     @POST("/user")
     fun postRequestLogin(
         @Field("email") email : String, //form 데이터는 @Field("email") 이렇게 보낸다

@@ -50,7 +50,7 @@ class MainActivity : BaseActivity() {
         binding.topicRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 
-    fun getTopicFromServer() {
+    fun getTopicFromServer() { //서버에서 정보 받아와서 위에서 넣어주는 것!
         Log.d("서버 함수", "진입")
 
         val token = ContextUtil.getLoginToken(mContext)
@@ -65,6 +65,7 @@ class MainActivity : BaseActivity() {
 
                     mTopicList.addAll(br.data.topics)
 
+                    //너 데이터 바뀌었으니 확인해!!
                     mTopicAdapter.notifyDataSetChanged()
                 }
                 else {

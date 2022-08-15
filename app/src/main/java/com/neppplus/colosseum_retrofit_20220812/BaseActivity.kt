@@ -22,10 +22,11 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var titleTxt : TextView
     lateinit var profileIcon : ImageView
 
+    //여기서 만든거 하나로 다 쓸거다!
     lateinit var retrofit: Retrofit
     lateinit var apiList : APIList
 
-    val TAG = javaClass.simpleName
+    val TAG = javaClass.simpleName //이렇게하면 상속받는 모든 kt에서 자신의 파일명을 쉽게 불러온다
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
