@@ -31,7 +31,9 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mContext = this
 
+        //여기서 데이터를 연결?
         retrofit = ServerAPI.getRetrofit()
+        //API리스트에 서버와 연결 가능한것들이 있다?
         apiList = retrofit.create(APIList::class.java)
 
         if (supportActionBar != null) {

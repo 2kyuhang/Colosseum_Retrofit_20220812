@@ -32,7 +32,7 @@ class LoginActivity : BaseActivity() {
         binding.loginBtn.setOnClickListener {
             val inputEmail = binding.emailEdt.text.toString()
             val inputPw = binding.passwordEdt.text.toString()
-
+            //                                                              레트로핏2로 임포트하기
             apiList.postRequestLogin(inputEmail, inputPw).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
                     call: Call<BasicResponse>,
